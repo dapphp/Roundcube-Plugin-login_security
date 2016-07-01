@@ -41,9 +41,6 @@ class login_security extends rcube_plugin
         $this->ip  = rcube_utils::remote_addr();
         $this->cfg = new stdClass();
 
-        // composer autoloader for things like OTP and CAPTCHA
-        require_once __DIR__ . '/vendor/autoload.php';
-
         $this->add_texts('localization/');
         $this->load_config();
 
@@ -127,8 +124,8 @@ class login_security extends rcube_plugin
                 exit;
             }
 
-            $_GET['namespace'] = 'roundcube_logsec';
-            include __DIR__ . '/vendor/dapphp/securimage/securimage_play.php';
+            $img = new Securimage(array('namespace' => 'roundcube_logsec'));
+            $img->outputAudioFile('wav');
             exit;
         } elseif ($params['task'] == 'login' && $params['action'] == 'login') {
             // a login post request - check if captcha enabled and should be checked
