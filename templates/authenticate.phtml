@@ -1,0 +1,30 @@
+<table>
+  <tbody>
+    <tr>
+      <td class="title" colspan="2" style="margin: 0; padding: 0; text-align: center; font-size: 1.2em">
+        <?= htmlspecialchars($this->gettext('entercodedesc')) ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="title">
+        <label><?= htmlspecialchars($this->gettext('entercode')) ?></label>
+      </td>
+      <td class="input">
+        <input type="text" required="required" name="logsec_auth_code" size="10" maxlength="8" autocomplete="off">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="formbuttons">
+  <input type="submit" value="<?= htmlspecialchars($this->gettext('submit')) ?>" class="button mainaction">
+  <input type="reset" value="<?= htmlspecialchars($this->gettext('logout')) ?>" class="button mainaction" onclick="window.location.href = '<?= htmlspecialchars(addslashes($this->rc->url(array('task' => 'logout'), false, false, true))) ?>'; return false">
+</p>
+
+<?php if (isset($this->incorrectCode) && $this->incorrectCode == true): ?>
+<div id="message">
+  <div class="warning" role="alert">
+    <?php echo $this->gettext('incorrectcode'); ?>
+  </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,62 @@
+<?php
+
+// Whether or not to enable captcha security.
+// Change 'logsec_captcha_threshold' to control the number of failed logins before showing captcha
+$config['logsec_use_captcha'] = true;
+
+// Whether or not to enable audio captcha functionality.
+// true to enable captcha audio playback, false to disable.
+// Currently, only English audio is supported by the roundcube plugin.
+$config['logsec_use_captcha_audio'] = false;
+
+// How many failed attempts before captcha is required; 0 to always show captcha.
+$config['logsec_captcha_threshold'] = 1;
+
+// Number of failed login attempts before temporarily banning an IP.
+// If using captcha, should be greater than logsec_captcha_threshold
+$config['logsec_ban_attempts'] = 15;
+
+// Number of minutes to ban an IP for after too many failed login attempts.
+$config['logsec_ban_time'] = 5;
+
+// Time threshold in minutes for counting failed logins.
+// If $logsec_ban_attempts failed logins have occurred within this period, ban for $logsec_ban_time minutes.
+// This effectively controls the maximum rate at which a bot could attempt to log in.
+// e.g. If ban threshold is 15 minutes, and ban attempts is 15, a bot could only attempt 15 logins in a 15
+//      minute window whether it was one every minute, or 15 in 5 seconds and then waiting 14:55 before trying again.
+$config['logsec_ban_threshold'] = 15;
+
+// Whether or not to enable OTP (authenticator) functionality for users.
+// If false, users cannot add OTP security to their accounts.
+$config['logsec_otp_enabled'] = true;
+
+// Issuer name to appear in authenticator app.
+// For example: Your Company Webmail
+$config['logsec_otp_issuer'] = 'Roundcube Webmail';
+
+
+// Configuration options for what the captcha looks like.
+// Any appearance options from vendor/dapphp/securimage/securimage.php can be used here.
+// Defaults are:
+//   'charset'              => 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789',
+//   'perturbation'         => .85,
+//   'code_length'          => 6,
+//   'use_transparent_text' => false,
+//   'num_lines'            => 4,
+//   'text_color'           => '#707070',
+//   'image_bg_color'       => '#fff',
+//   --------------------------------------------------------------------------
+$config['logsec_captcha_appearance'] = array(
+    //'perturbation'         => .70,        // intensity of distortion
+    //'code_length'          => 5,          // number of characters on captcha image
+    //'image_bg_color'       => '#00A1E1',  // background color of captcha image
+    //'text_color'           => '#fff',     // text color of captcha code
+    //'line_color'           => '#fff',     // color of ramdom lines drawn over image
+    //'num_lines'            => rand(3,7),  // number of lines to draw over code
+    //'noise_level'          => 0,          // intensity of randomly place "noise" on the image
+    //'noise_color'          => '#fff',     // color of the noise added
+    //'use_transparent_text' => true,       // whether or not to use transparency when drawing text
+    //'text_transparency_percentage' => 30, // opacity of image text
+    //'image_signature'      => '',         // signature text to draw on bottom right of image
+    //'signature_color'      => '#58595c',  // color of signature text
+);

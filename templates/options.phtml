@@ -1,0 +1,43 @@
+<?php if (!empty($prefs['logsec_otp_secret'])): ?>
+<a href="#" onclick="$('#sec').html(oldSecret); return showQRCode(oldProv);"><?= htmlspecialchars($this->gettext('show')) ?></a>
+&nbsp;/&nbsp;
+<?php endif; ?>
+<a id="newsecret" href="#" onclick="return getNewSecret();"><?= htmlspecialchars($this->gettext('generatenew')) ?></a>
+<div id="qrcode" style="display: none">
+    <p><?= htmlspecialchars($this->gettext('logsec_otpsetup')) ?></p>
+    <p>
+      <table>
+        <tr><td><strong><?= htmlspecialchars($this->gettext('secret')) ?></strong></td><td><span id="sec"></span></td></tr>
+        <tr><td><strong><?= htmlspecialchars($this->gettext('type')) ?></strong></td><td>TOTP</td></tr>
+        <tr><td><strong><?= htmlspecialchars($this->gettext('digits')) ?></strong></td><td>6</td></tr>
+        <tr><td><strong><?= htmlspecialchars($this->gettext('algorithm')) ?></strong></td><td>SHA1</td></tr>
+      </table>
+    </p>
+    <img id="qrcodeimg" src="" style="height: 150px; width: 150px">
+</div>
+
+<script type="text/javascript">
+    var newProv   = '<?= $prov ?>';
+    var oldProv   = '<?= $oldProv ?>';
+    var oldSecret = '<?= $prefs['logsec_otp_secret'] ?>';
+    var newSecret = '<?= $newsec ?>';
+
+    function getNewSecret()
+    {
+        $('#newsecret').hide();
+        showQRCode(newProv);
+
+        $('#logsec_otp_secret').val('<?= $newsec ?>');
+        $('#sec').html('<?= $newsec ?>');
+
+        return false;
+    }
+
+    function showQRCode(provUri)
+    {
+        $('#qrcodeimg').attr('src', 'https://chart.googleapis.com/chart?chs=150x150&chld=M|0&cht=qr&chl=' + encodeURIComponent(provUri));
+        $('#qrcode').show();
+
+        return false;
+    }
+</script>
