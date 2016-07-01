@@ -155,8 +155,10 @@ class login_security extends rcube_plugin
         $failures = $this->getFailedLoginCount();
 
         if ($this->cfg->logsec_use_captcha && $failures >= $this->cfg->logsec_captcha_threshold) {
+            $this->rc->output->add_header("<style type='text/css'>\n#login-form .box-inner { background-size: cover; }\n</style>");
+
             $opts = array(
-                'securimage_path' => 'plugins/login_security/vendor/dapphp/securimage',
+                'securimage_path' => 'vendor/dapphp/securimage',
                 'show_image_url'  => $this->rc->url(array('action' => 'logsec_captcha')),
                 'audio_play_url'  => $this->rc->url(array('action' => 'logsec_captcha_audio')),
                 'input_text'      => $this->gettext('entercode'),
