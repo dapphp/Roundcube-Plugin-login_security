@@ -363,6 +363,8 @@ class login_security extends rcube_plugin
 
         // generate new otp secret
         $issuer = $this->rc->config->get('logsec_otp_issuer');
+        if (trim($issuer) == '') $issuer = 'Roundcube Webmail';
+
         $newsec = \Base32\Base32::encode($this->generateOtpSecret());
         $secret = new html_inputfield(array(
             'name'         => 'logsec_otp_secret',
